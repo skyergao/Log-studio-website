@@ -287,54 +287,165 @@ const ValueSection = () => {
 };
 
 // 4. 团队能力介绍
-const capabilities = [
-  { icon: <Monitor size={32} />, name: "产品设计与开发" }, 
-  { icon: <Search size={32} />, name: "用户调研" },
-  { icon: <MessageSquare size={32} />, name: "产品咨询" },
-  { icon: <Glasses size={32} />, name: "虚拟仿真设计与开发" }
+
+ // ==========================================
+// 1. 新增：四个动态 SVG 图标组件
+// ==========================================
+const SphereIcon = () => (
+  <svg viewBox="0 0 100 100" className="w-32 h-32 lg:w-48 lg:h-48 transition-transform duration-1000 ease-out group-hover:scale-110">
+    <circle cx="50" cy="50" r="45" fill="none" stroke="currentColor" strokeWidth="1" />
+    <g className="origin-[50px_50px] transition-transform duration-1000 ease-in-out group-hover:rotate-180">
+      <ellipse cx="50" cy="50" rx="45" ry="15" fill="none" stroke="currentColor" strokeWidth="1" />
+      <ellipse cx="50" cy="50" rx="45" ry="30" fill="none" stroke="currentColor" strokeWidth="1" />
+      <path d="M 5 50 L 95 50" fill="none" stroke="currentColor" strokeWidth="1" opacity="0.5" />
+    </g>
+    <g className="origin-[50px_50px] transition-transform duration-1000 ease-in-out group-hover:-rotate-180">
+      <ellipse cx="50" cy="50" rx="15" ry="45" fill="none" stroke="currentColor" strokeWidth="1" />
+      <ellipse cx="50" cy="50" rx="30" ry="45" fill="none" stroke="currentColor" strokeWidth="1" />
+      <path d="M 50 5 L 50 95" fill="none" stroke="currentColor" strokeWidth="1" opacity="0.5" />
+    </g>
+  </svg>
+);
+
+const ParticlesIcon = () => (
+  <svg viewBox="0 0 100 100" className="w-32 h-32 lg:w-48 lg:h-48 transition-transform duration-1000 ease-in-out group-hover:-rotate-90 group-hover:scale-110">
+    <circle cx="50" cy="50" r="10" fill="none" stroke="currentColor" strokeWidth="1" strokeDasharray="2 3" opacity="0.8" />
+    <circle cx="50" cy="50" r="20" fill="none" stroke="currentColor" strokeWidth="1" strokeDasharray="3 4" opacity="0.6" />
+    <circle cx="50" cy="50" r="30" fill="none" stroke="currentColor" strokeWidth="1" strokeDasharray="4 5" opacity="0.4" />
+    <circle cx="50" cy="50" r="40" fill="none" stroke="currentColor" strokeWidth="1" strokeDasharray="5 6" opacity="0.2" />
+    <circle cx="50" cy="50" r="48" fill="none" stroke="currentColor" strokeWidth="1" strokeDasharray="6 8" opacity="0.1" />
+  </svg>
+);
+
+const StarburstIcon = () => (
+  <svg viewBox="0 0 100 100" className="w-32 h-32 lg:w-48 lg:h-48 transition-transform duration-700 ease-out group-hover:rotate-180 group-hover:scale-90">
+    <circle cx="50" cy="50" r="3" fill="currentColor" />
+    {Array.from({length: 24}).map((_, i) => (
+      <line 
+        key={i} 
+        x1="50" y1="50" 
+        x2={50 + 45 * Math.cos(i * Math.PI / 12)} 
+        y2={50 + 45 * Math.sin(i * Math.PI / 12)} 
+        stroke="currentColor" 
+        strokeWidth="1" 
+      />
+    ))}
+  </svg>
+);
+
+const TetrahedronIcon = () => (
+  <svg viewBox="0 0 100 100" className="w-32 h-32 lg:w-48 lg:h-48 transition-transform duration-700 ease-out group-hover:scale-110">
+    <g className="transition-transform duration-700 ease-out origin-[50px_53px] group-hover:-rotate-[120deg]">
+      <polygon points="50,11 13.63,74 86.37,74" fill="none" stroke="currentColor" strokeWidth="1.2" strokeLinejoin="round" />
+      <line x1="50" y1="11" x2="50" y2="53" stroke="currentColor" strokeWidth="1" />
+      <line x1="13.63" y1="74" x2="50" y2="53" stroke="currentColor" strokeWidth="1" />
+      <line x1="86.37" y1="74" x2="50" y2="53" stroke="currentColor" strokeWidth="1" />
+    </g>
+    <g className="transition-transform duration-700 ease-out origin-[50px_53px] group-hover:rotate-[120deg]">
+      <polygon points="50,31 30.95,64 69.05,64" fill="none" stroke="currentColor" strokeWidth="0.5" strokeLinejoin="round" opacity="0.5" />
+      <line x1="50" y1="31" x2="50" y2="53" stroke="currentColor" strokeWidth="0.5" opacity="0.5" />
+      <line x1="30.95" y1="64" x2="50" y2="53" stroke="currentColor" strokeWidth="0.5" opacity="0.5" />
+      <line x1="69.05" y1="64" x2="50" y2="53" stroke="currentColor" strokeWidth="0.5" opacity="0.5" />
+    </g>
+  </svg>
+);
+
+// ==========================================
+// 2. 新增：服务领域数据
+// ==========================================
+const capabilitiesData = [
+  { 
+    icon: <SphereIcon />, 
+    name: "产品设计与开发", 
+    desc: "将创意转化为卓越的数字产品，提供网站、小程序、App的设计与开发。"
+  }, 
+  { 
+    icon: <ParticlesIcon />, 
+    name: "用户调研",
+    desc: "深入洞察用户行为与需求，通过客观数据与反馈驱动产品决策。"
+  },
+  { 
+    icon: <StarburstIcon />, 
+    name: "产品咨询",
+    desc: "提供专业的商业与产品策略规划，确立清晰的市场竞争优势。"
+  },
+  { 
+    icon: <TetrahedronIcon />, 
+    name: "虚拟仿真设计与开发",
+    desc: "构建高逼真度的三维虚拟环境，实现前沿的交互式数字仿真体验。"
+  }
 ];
 
-const CapabilitiesSection = () => {
-  return (
-    <section className="py-24 bg-zinc-950 border-y border-white/5 relative z-10">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="mb-20 text-center">
-          <h2 className="text-4xl md:text-6xl font-bold text-white leading-tight">
-            我们提供多领域
-            <br className="md:hidden" />
-            <span className="md:ml-3">
-              <ShineText 
-                text="全方位解决方案" 
-                finalStyle={{
-                  backgroundImage: `linear-gradient(to right, ${THEME_COLOR}, #3b82f6)`,
-                  WebkitBackgroundClip: 'text',
-                  backgroundClip: 'text',
-                  color: 'transparent'
-                }}
-              />
-            </span>
-          </h2>
-        </div>
-        <div className="grid grid-cols-2 md:grid-cols-4 gap-4 md:gap-6">
-          {capabilities.map((cap, index) => (
-            <div key={index} className="flex flex-col items-center justify-center p-6 md:p-10 h-80 md:h-96 w-full max-w-[240px] mx-auto bg-black border border-white/10 hover:border-[#A8EE48] transition-colors duration-300 group rounded-sm">
-              <div className="p-4 md:p-5 bg-zinc-900 rounded-full mb-6 md:mb-8 text-white group-hover:bg-[#A8EE48] group-hover:text-black transition-colors duration-300">
-                {cap.icon}
-              </div>
-              <h3 className="text-lg md:text-xl font-medium text-white text-center px-2">{cap.name}</h3>
+// ==========================================
+// 3. 替换：CapabilitiesSection 组件主体
+// ==========================================
+const CapabilitiesSection = () => (
+  <section className="py-24 bg-black border-y border-white/10 relative z-10 flex flex-col">
+    <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mb-16 w-full text-center">
+      <h2 className="text-4xl md:text-5xl font-bold text-white leading-tight">
+        我们提供多领域
+        <br className="md:hidden" />
+        <span className="md:ml-3">
+          <ShineText 
+            text="全方位解决方案" 
+            finalStyle={{ backgroundImage: `linear-gradient(to right, ${THEME_COLOR}, #3b82f6)`, WebkitBackgroundClip: 'text', backgroundClip: 'text', color: 'transparent' }}
+          />
+        </span>
+      </h2>
+    </div>
+
+    <div className="w-full border-t border-white/10">
+      <div className="flex flex-col lg:flex-row w-full divide-y lg:divide-y-0 lg:divide-x divide-white/10">
+        {capabilitiesData.map((cap, index) => (
+          <div 
+            key={index} 
+            className="group flex flex-col justify-between w-full lg:w-1/4 h-[400px] md:h-[450px] lg:h-[650px] p-8 lg:p-12 transition-colors duration-500 hover:bg-[#A8EE48] cursor-pointer"
+          >
+            <div className="flex-1 flex items-center justify-center text-white group-hover:text-black transition-colors duration-500">
+              {cap.icon}
             </div>
-          ))}
-        </div>
+            
+            {/* 下方文字容器加入了固定高度：flex-none h-[120px] lg:h-[140px]，完美对齐 */}
+            <div className="text-white group-hover:text-black transition-colors duration-500 flex-none h-[120px] lg:h-[140px]">
+              <h3 className="text-2xl font-bold mb-3 tracking-tight">{cap.name}</h3>
+              <p className="text-sm opacity-60 group-hover:opacity-80 leading-relaxed font-mono">
+                {cap.desc}
+              </p>
+            </div>
+          </div>
+        ))}
       </div>
-    </section>
-  );
-};
+    </div>
+  </section>
+);
+
+
+
+// End Generation Here
+
+
+ 
 
 // 5. 客户案例
 const cases = [
-  { logo: <Code size={20} />, title: "未来金融 Dashboard", client: "FinTech Corp", image: "https://images.unsplash.com/photo-1551288049-bebda4e38f71?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80" },
-  { logo: <Monitor size={20} />, title: "智能物流管理系统", client: "LogiTech", image: "https://images.unsplash.com/photo-1555421689-d68471e18963?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80" },
-  { logo: <Zap size={20} />, title: "VR 工业仿真平台", client: "MechIndustry", image: "https://images.unsplash.com/photo-1592478411213-61535fdd861d?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80" }
+  { 
+    logo: <img src="https://logdesign.oss-cn-beijing.aliyuncs.com/1-icon.png" style={{ height: '20px', objectFit: 'contain' }} alt="logo" />, 
+    title: "理财通产品设计", 
+    client: "腾讯理财通", 
+    image: "https://logdesign.oss-cn-beijing.aliyuncs.com/Frame%201.jpg" 
+  },
+  { 
+    logo: <img src="https://logdesign.oss-cn-beijing.aliyuncs.com/2-icon.png" style={{ height: '20px', objectFit: 'contain' }} alt="logo" />, 
+    title: "易方达产品功能页面", 
+    client: "易方达基金", 
+    image: "https://logdesign.oss-cn-beijing.aliyuncs.com/Frame%202.jpg" 
+  },
+  { 
+    logo: <img src="https://logdesign.oss-cn-beijing.aliyuncs.com/3-icon.png" style={{ height: '20px', objectFit: 'contain' }} alt="logo" />, 
+    title: "热动力虚拟仿真实验台", 
+    client: "清华大学", 
+    image: "https://logdesign.oss-cn-beijing.aliyuncs.com/Frame%203.jpg" 
+  }
 ];
 
 const CaseSection = () => {
@@ -441,14 +552,12 @@ const Footer = () => {
         </div>
 
         <div className="border-t border-white/5 pt-8 flex flex-col md:flex-row justify-between items-center gap-4">
-          <div className="flex items-center gap-2">
-            <div className="w-6 h-6 flex items-center justify-center rounded-sm" style={{ backgroundColor: THEME_COLOR }}>
-              <span className="text-black font-bold text-xs">L</span>
+              <div className="flex items-center gap-2">
+                <img src="https://yuandong-experiment.oss-cn-beijing.aliyuncs.com/Slice6%201.png" alt="Log Design Logo" className="w-6 h-6 object-contain" />
+                <span className="text-gray-400 font-bold text-lg">Log Design</span>
+              </div>
+              <p className="text-gray-600 text-sm">© 2024 Log Design Studio. All rights reserved.</p>
             </div>
-            <span className="text-gray-400 font-bold text-lg">Log Design</span>
-          </div>
-          <p className="text-gray-600 text-sm">© 2024 Log Design Studio. All rights reserved.</p>
-        </div>
       </div>
     </footer>
   );
